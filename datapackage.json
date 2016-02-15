@@ -9,7 +9,7 @@
   },
   "sources": [{
     "name": "Natural Earth",
-    "web": "http//www.naturalearthdata.com/download/110m/cultural/"
+    "web": "http://www.naturalearthdata.com/downloads/110m-cultural-vectors/"
   }],
   "keywords": [
     "geodata",
