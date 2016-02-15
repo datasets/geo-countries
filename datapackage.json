@@ -1,0 +1,57 @@
+{
+  "name": "geo-boundaries-world-110m",
+  "title": "Country Polygons as GeoJSON at scale 1:110m",
+  "version": "0.2.0",
+  "description": "geodata data package providing geojson polygons for all the world's countries",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lexman/geo-countries-110m.git"
+  },
+  "sources": [{
+    "name": "Natural Earth",
+    "web": "http//www.naturalearthdata.com/download/110m/cultural/"
+  }],
+  "keywords": [
+    "geodata",
+    "vector",
+    "country"
+  ],
+  "licenses": {
+    "type": "ODC-PDDL",
+    "url": "http://opendatacommons.org/licenses/pddl/1.0/"
+  },
+  "resources": [
+    {
+      "name": "countries",
+      "path": "countries.geojson",
+      "format": "geojson",
+      "mediatype": "application/json"
+      "schema": {
+        "fields": [
+          {
+            "name": "name",
+            "description": "Common name of the country",
+            "type": "string",
+          },
+          {
+            "name": "ISO3166-1-Alpha-3",
+            "description": "3 characters codes for the country, according to ISO3166",
+            "type": "string",
+          },
+        ]
+      },
+      "foreignKeys" : [
+        {
+          "fields": "ISO3166-1-Alpha-3",
+          "reference": {
+            "datapackage": "https://github.com/datasets/country-codes/",
+            "resource": "country-codes",
+            "fields": "ISO3166-1-Alpha-3"
+          }
+        }
+    }        
+      ]
+    }
+  ],
+  "homepage": "git://github.com/lexman/geo-countries-110m"
+}
