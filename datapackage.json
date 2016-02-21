@@ -25,7 +25,7 @@
       "name": "countries",
       "path": "data/countries.geojson",
       "format": "geojson",
-      "mediatype": "application/json"
+      "mediatype": "application/json",
       "schema": {
         "fields": [
           {
