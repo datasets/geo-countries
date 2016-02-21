@@ -31,13 +31,13 @@
           {
             "name": "name",
             "description": "Common name of the country",
-            "type": "string",
+            "type": "string"
           },
           {
             "name": "ISO3166-1-Alpha-3",
             "description": "3 characters codes for the country, according to ISO3166 standard",
-            "type": "string",
-          },
+            "type": "string"
+          }
         ]
       },
       "foreignKeys" : [
@@ -49,7 +49,6 @@
             "fields": "ISO3166-1-Alpha-3"
           }
         }
-    }        
       ]
     }
   ],
