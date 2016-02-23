@@ -1,4 +1,4 @@
-These scripts retrieve data from Natural Earth's website and computes a the ``data/countries.json`` file.
+These scripts retrieve data from Natural Earth's website and computes a the ``data/countries.geojson`` file.
 
 
 ## Install the dependencies
