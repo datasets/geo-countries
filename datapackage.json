@@ -35,7 +35,7 @@
           },
           {
             "name": "ISO3166-1-Alpha-3",
-            "description": "3 characters codes for the country, according to ISO3166 standard",
+            "description": "3 characters code for the country, according to ISO3166 standard",
             "type": "string"
           }
         ]
