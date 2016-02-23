@@ -1,11 +1,11 @@
 {
-  "name": "geo-boundaries-world-110m",
-  "title": "Country Polygons as GeoJSON at scale 1:110m",
+  "name": "geo-countries",
+  "title": "Country Polygons as GeoJSON",
   "version": "0.2.0",
   "description": "geodata data package providing geojson polygons for all the world's countries",
   "repository": {
     "type": "git",
-    "url": "git://github.com/lexman/geo-countries-110m.git"
+    "url": "git://github.com/datasets/geo-countries.git"
   },
   "sources": [{
     "name": "Natural Earth",
@@ -52,5 +52,5 @@
       ]
     }
   ],
-  "homepage": "http://github.com/lexman/geo-countries-110m"
+  "homepage": "http://github.com/datasets/geo-countries"
 }

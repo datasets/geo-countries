@@ -5,7 +5,7 @@ Perfect for use in apps and visualizations.
 
 The data comes from [Natural Earth][naturalearth], a community effort to make visually pleasing, well-crafted maps with cartography or GIS software at small scale.
 
-The shape of the countries are at scale 1:110. It has two fields : 
+The shape of the countries have two fields : 
 * name : the common name for the country
 * ISO3166-1-Alpha-3 : three letters iso code of the country
 
@@ -16,7 +16,7 @@ More info about countries can be get from datapackage https://github.com/dataset
 
 ## Preparation
 
-You can run the script yourself to update the data and publish them to github : see [scripts README](scripts/README.md)
+To run the script in order to update the data : see [scripts README](scripts/README.md)
 
 ## License
 
