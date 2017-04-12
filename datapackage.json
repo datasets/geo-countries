@@ -16,10 +16,10 @@
     "vector",
     "country"
   ],
-  "licenses": {
+  "licenses": [{
     "type": "ODC-PDDL",
     "url": "http://opendatacommons.org/licenses/pddl/1.0/"
-  },
+  }],
   "resources": [
     {
       "name": "countries",
