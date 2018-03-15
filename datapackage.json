@@ -7,20 +7,25 @@
     "type": "git",
     "url": "git://github.com/datasets/geo-countries.git"
   },
-  "sources": [{
-    "name": "Natural Earth",
-    "path": "http://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
-    "title": "Natural Earth"
-  }],
+  "sources": [
+    {
+      "name": "Natural Earth",
+      "path": "http://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+      "title": "Natural Earth"
+    }
+  ],
   "keywords": [
     "geodata",
     "vector",
     "country"
   ],
-  "licenses": [{
-    "type": "ODC-PDDL",
-    "url": "http://opendatacommons.org/licenses/pddl/1.0/"
-  }],
+  "licenses": [
+    {
+      "name": "ODC-PDDL-1.0",
+      "path": "http://opendatacommons.org/licenses/pddl/",
+      "title": "Open Data Commons Public Domain Dedication and License v1.0"
+    }
+  ],
   "resources": [
     {
       "name": "countries",
