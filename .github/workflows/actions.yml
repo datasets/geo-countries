@@ -44,6 +44,12 @@ jobs:
         sudo apt-get install -y xvfb
         sudo apt-get install -y chromium-browser
 
+    - name: Install GDAL (ogr2ogr)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gdal-bin
+        ogr2ogr --version
+
     - name: Run Makefile with Xvfb
       run: |
         Xvfb :99 -screen 0 1024x768x24 &
