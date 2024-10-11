@@ -46,7 +46,7 @@
           }
         ]
       },
-      "foreignKeys" : [
+      "foreignKeys": [
         {
           "fields": "ISO3166-1-Alpha-3",
           "reference": {
@@ -58,5 +58,6 @@
       ]
     }
   ],
-  "homepage": "http://github.com/datasets/geo-countries"
+  "homepage": "http://github.com/datasets/geo-countries",
+  "collection": "geojson"
 }
