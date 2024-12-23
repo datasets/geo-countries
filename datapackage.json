@@ -59,5 +59,6 @@
     }
   ],
   "homepage": "http://github.com/datasets/geo-countries",
-  "collection": "geojson"
+  "collection": "geojson",
+  "has_premium": true
 }
