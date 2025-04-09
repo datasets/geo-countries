@@ -1,11 +1,11 @@
 ## Description
 
-These scripts retrieve data from Natural Earth's website and computes a the ``data/countries.geojson`` file.
+These scripts retrieve data from Natural Earth's website and compute the ``data/countries.geojson`` file.
 
 
 ## Install the dependencies
 
-The scripts makes use of the wonderful ogr2ogr tool (part of the gdal suite) and a few other shell commands that are glued together with selenium parser.
+The scripts make use of the wonderful ogr2ogr tool (part of the gdal suite) and a few other shell commands that are glued together with selenium parser.
 Therefore, you'll need to install [git](https://git-scm.com/downloads), [gdal](https://gdal.org/en/latest/download.html)
 
 
@@ -20,7 +20,7 @@ After you have checked out the code, go into the script directory and run the pr
     pip install -r scripts/requirements.txt
 
     # Run the job locally through Makefile
-    make run
+    make data
     
     # or else you could run scripts manually
     python3 scripts/process.py

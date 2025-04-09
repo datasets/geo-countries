@@ -9,11 +9,11 @@ Perfect for use in apps and visualizations.
 
 The data comes from [Natural Earth][naturalearth], a community effort to make visually pleasing, well-crafted maps with cartography or GIS software at small scale.
 
-The shape of the countries have two fields : 
+The shape of the countries has two fields : 
 * name : the common name for the country
 * ISO3166-1-Alpha-3 : three letters iso code of the country
 
-More info about countries can be get from datapackage https://github.com/datasets/country-codes by a join on field ISO3166-1-Alpha-3
+More info about countries can be obtained from datapackage https://github.com/datasets/country-codes by a join on field ISO3166-1-Alpha-3
 
 [naturalearth]: http://www.naturalearthdata.com/
 [datapackage]: http://dataprotocols.org/data-packages/
