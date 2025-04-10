@@ -1,21 +1,9 @@
-VENV = venv
-PYTHON = $(VENV)/bin/python3
-PIP = $(VENV)/bin/pip
-EXTRACTED_DIR = extracted_files
-
 .PHONY: data clean
-
-all: data
-
-data: $(VENV)/bin/activate
-	$(PYTHON) scripts/process.py
-
-$(VENV)/bin/activate: scripts/requirements.txt
-	python3 -m venv $(VENV)
-	$(PIP) install -r scripts/requirements.txt
-
 clean:
-	rm -rf __pycache__
-	rm -rf $(VENV)
 	find . -maxdepth 1 -name "*.zip" -exec rm -f {} +
-	if [ -d $(EXTRACTED_DIR) ]; then rm -rf $(EXTRACTED_DIR); fi
+
+download:
+	if [ ! -f ne_10m_admin_0_countries.zip ]; then curl -L -o ne_10m_admin_0_countries.zip https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip; fi
+
+data: download
+	ogr2ogr -f GeoJSON -makevalid -lco COORDINATE_PRECISION=6 -sql "SELECT admin as name, iso_a3 as \"ISO3166-1-Alpha-3\", iso_a2 as \"ISO3166-1-Alpha-2\" FROM ne_10m_admin_0_countries" data/countries.geojson /vsizip/ne_10m_admin_0_countries.zip

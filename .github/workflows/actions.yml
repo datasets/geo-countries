@@ -1,4 +1,4 @@
-name: Run Makefile with Selenium
+name: Run Makefile
 
 on:
   # Schedule to run on the 1st day of each month
@@ -26,40 +26,18 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v3
 
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-
-    - name: Install Python dependencies
-      run: |
-        python -m venv venv
-        source venv/bin/activate
-        pip install --upgrade pip
-        pip install -r scripts/requirements.txt
-
-    - name: Install Xvfb and dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y xvfb
-        sudo apt-get install -y chromium-browser
-
     - name: Install GDAL (ogr2ogr)
       run: |
         sudo apt-get update
         sudo apt-get install -y gdal-bin
         ogr2ogr --version
 
-    - name: Run Makefile with Xvfb
+    - name: Run Makefile
       run: |
-        Xvfb :99 -screen 0 1024x768x24 &
-        export DISPLAY=:99
-        source venv/bin/activate   
-        make all                
+        make data                
 
     - name: Run Make Clean
       run: |
-        source venv/bin/activate  
         make clean          
 
     - name: Push and Commit      
@@ -70,4 +48,4 @@ jobs:
       run: |
         git config --global user.email "${{env.CI_COMMIT_EMAIL}}"
         git config --global user.name "${{env.CI_COMMIT_NAME}}"
-        git diff --quiet && echo "No changes to commit" || (git add data/country-codes.csv && git commit -m "${{env.CI_COMMIT_MESSAGE}}" && git push)
+        git diff --quiet && echo "No changes to commit" || (git add data/countries.geojson && git commit -m "${{env.CI_COMMIT_MESSAGE}}" && git push)
