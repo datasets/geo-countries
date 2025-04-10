@@ -9,18 +9,48 @@ Perfect for use in apps and visualizations.
 
 The data comes from [Natural Earth][naturalearth], a community effort to make visually pleasing, well-crafted maps with cartography or GIS software at small scale.
 
-The shape of the countries has two fields : 
-* name : the common name for the country
-* ISO3166-1-Alpha-3 : three letters iso code of the country
-
 More info about countries can be obtained from datapackage https://github.com/datasets/country-codes by a join on field ISO3166-1-Alpha-3
 
-[naturalearth]: http://www.naturalearthdata.com/
-[datapackage]: http://dataprotocols.org/data-packages/
+[naturalearth]: https://www.naturalearthdata.com/
+[datapackage]: https://datapackage.org/standard/data-package/
 
 ## Preparation
 
-To run the script in order to update the data : see [scripts README](scripts/README.md)
+To run the script and update the data:
+
+### Prerequisites
+
+1. Install required tools:
+   - [GDAL](https://gdal.org/en/latest/download.html) - for geographic data processing
+
+2. Verify GDAL installation:
+   ```bash
+   ogr2ogr --version
+   ```
+
+### Data Processing
+
+The project uses `ogr2ogr` to convert Natural Earth's country boundaries from Shapefile to GeoJSON format, with the following features:
+- Coordinate precision set to 6 decimal places
+- Geometry validation enabled (`-makevalid`):
+  - Fixes self-intersecting polygons
+  - Corrects ring orientation
+  - Removes duplicate vertices
+  - Ensures geometric validity for better compatibility with GIS tools
+- Selected fields:
+  - `name`: Common name of the country (from admin field)
+  - `ISO3166-1-Alpha-2`: Two-letter ISO country code (from iso_a2 field)
+  - `ISO3166-1-Alpha-3`: Three-letter ISO country code (from iso_a3 field)
+
+To process the data:
+  ```bash
+  make data
+  ```
+
+This will:
+1. Download the Natural Earth countries dataset
+2. Convert it to GeoJSON format with the specified settings
+3. Save the result in `data/countries.geojson`
 
 ## License
 
@@ -32,12 +62,7 @@ formally required a link back or credit to [Natural Earth][naturalearth], [Lexma
 All source code is licenced under the [MIT licence][mit].
 
 [mit]: https://opensource.org/licenses/MIT
-[naturalearth]: http://www.naturalearthdata.com/
-[pddl]: http://opendatacommons.org/licenses/pddl/1.0/
-[lexman]: http://github.com/lexman
-[okfn]: http://okfn.org/
-
-
-
-
-
+[naturalearth]: https://www.naturalearthdata.com/
+[pddl]: https://opendatacommons.org/licenses/pddl/1.0/
+[lexman]: https://github.com/lexman
+[okfn]: https://okfn.org/
