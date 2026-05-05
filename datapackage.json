@@ -30,18 +30,24 @@
     {
       "name": "countries",
       "path": "data/countries.geojson",
+      "description": "GeoJSON FeatureCollection of 258 country (and territory) polygons. Features without an assigned ISO code carry the sentinel value \"-99\" for both ISO fields.",
       "format": "geojson",
       "mediatype": "application/json",
       "schema": {
         "fields": [
           {
             "name": "name",
-            "description": "Common name of the country",
+            "description": "Common name of the country or territory",
+            "type": "string"
+          },
+          {
+            "name": "ISO3166-1-Alpha-2",
+            "description": "2-letter ISO 3166-1 country code. Set to \"-99\" for features that have no assigned ISO code (e.g. disputed or unrecognised territories).",
             "type": "string"
           },
           {
             "name": "ISO3166-1-Alpha-3",
-            "description": "3 characters code for the country, according to ISO3166 standard",
+            "description": "3-letter ISO 3166-1 country code. Set to \"-99\" for features that have no assigned ISO code (e.g. disputed or unrecognised territories).",
             "type": "string"
           }
         ]
