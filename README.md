@@ -68,9 +68,8 @@ The geometry and the three properties come from [Natural Earth][naturalearth]. I
 
 The maintainers offer this package under the [Open Data Commons Public Domain Dedication and License][pddl] (PDDL) 1.0. A credit is not required, but a link back to [Natural Earth][naturalearth], [Lexman][lexman] and the [Open Knowledge Foundation][okfn] is appreciated. See [ATTRIBUTION.txt](ATTRIBUTION.txt).
 
-All source code is licensed under the [MIT licence][mit].
+All source code is licensed under the [MIT licence](LICENSE).
 
-[mit]: https://opensource.org/licenses/MIT
 [pddl]: https://opendatacommons.org/licenses/pddl/1.0/
 [lexman]: https://github.com/lexman
 [okfn]: https://okfn.org/
