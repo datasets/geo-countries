@@ -33,14 +33,17 @@ To run the script and update the data:
 The project uses `ogr2ogr` to convert Natural Earth's country boundaries from Shapefile to GeoJSON format, with the following features:
 - Coordinate precision set to 6 decimal places
 - Geometry validation enabled (`-makevalid`):
-  - Fixes self-intersecting polygons
-  - Corrects ring orientation
-  - Removes duplicate vertices
+  - Fixes invalid geometries such as self-intersecting polygons
   - Ensures geometric validity for better compatibility with GIS tools
+  - Ring direction is not changed: all outer rings in the output run clockwise (RFC 7946 asks for counter-clockwise; most tools accept both)
 - Selected fields:
   - `name`: Common name of the country (from admin field)
-  - `ISO3166-1-Alpha-2`: Two-letter ISO country code (from iso_a2 field)
   - `ISO3166-1-Alpha-3`: Three-letter ISO country code (from iso_a3 field)
+  - `ISO3166-1-Alpha-2`: Two-letter ISO country code (from iso_a2 field)
+
+Natural Earth writes `-99` where it has no ISO code in its main code fields. Two real countries are affected, France and Norway; the build fills them from Natural Earth's own `ISO_A3_EH` and `ISO_A2_EH` fields (FRA and FR, NOR and NO). 20 of the 258 features still have `-99` in both code fields.
+These 20 are disputed or special areas (for example Kosovo, Northern Cyprus, Somaliland and Siachen Glacier) that have no ISO 3166-1 code.
+A join on `ISO3166-1-Alpha-3` will not match these features.
 
 To process the data:
   ```bash
