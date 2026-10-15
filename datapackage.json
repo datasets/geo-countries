@@ -10,7 +10,7 @@
   "sources": [
     {
       "name": "Natural Earth",
-      "path": "http://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+      "path": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip",
       "title": "Natural Earth"
     }
   ],
@@ -22,7 +22,7 @@
   "licenses": [
     {
       "name": "ODC-PDDL-1.0",
-      "path": "http://opendatacommons.org/licenses/pddl/",
+      "path": "https://opendatacommons.org/licenses/pddl/1.0/",
       "title": "Open Data Commons Public Domain Dedication and License v1.0"
     }
   ],

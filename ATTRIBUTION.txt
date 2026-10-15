@@ -1,0 +1,15 @@
+Attribution — Country Polygons as GeoJSON
+
+Contains information from Natural Earth (https://www.naturalearthdata.com/),
+public domain under its terms of use (https://www.naturalearthdata.com/about/terms-of-use/).
+
+Changes made to the source data: the 10m Admin-0 Countries file was converted to GeoJSON;
+only the country name and the ISO 3166-1 alpha-2 and alpha-3 code fields were kept; for France
+and Norway, where Natural Earth has -99 in its main code fields, the codes were taken from its
+ISO_A2_EH and ISO_A3_EH fields; invalid geometries were repaired and coordinates were rounded
+to 6 decimal places.
+
+Not endorsed by, or affiliated with, Natural Earth.
+
+Natural Earth provides its data as a public service and is not responsible for problems
+relating to accuracy, content, design, or how it is used.

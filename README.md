@@ -57,12 +57,11 @@ This will:
 
 ## License
 
-All data is licensed under the [Open Data Commons Public Domain Dedication and License][pddl]. 
+The geometry and the three attributes (`name` and the two ISO codes) come from [Natural Earth][naturalearth]. Its [terms of use](https://www.naturalearthdata.com/about/terms-of-use/) put the data in the public domain and allow commercial use without permission or credit. This dataset is offered under the [Open Data Commons Public Domain Dedication and License][pddl].
 
-Note that the original data from [Natural Earth][naturalearth] is public domain. While no credit is 
-formally required a link back or credit to [Natural Earth][naturalearth], [Lexman][lexman] and the [Open Knowledge Foundation][okfn] is much appreciated.
+A credit is not required, but a link back to [Natural Earth][naturalearth], [Lexman][lexman] and the [Open Knowledge Foundation][okfn] is appreciated. See `ATTRIBUTION.txt`.
 
-All source code is licenced under the [MIT licence][mit].
+All source code is licensed under the [MIT licence][mit].
 
 [mit]: https://opensource.org/licenses/MIT
 [naturalearth]: https://www.naturalearthdata.com/
