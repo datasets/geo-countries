@@ -2,7 +2,7 @@
   "name": "geo-countries",
   "title": "Country Polygons as GeoJSON",
   "version": "0.2.0",
-  "description": "geodata data package providing geojson polygons for all the world's countries",
+  "description": "GeoJSON polygons for the world's countries and for some territories, disputed areas and special areas, from Natural Earth.",
   "repository": {
     "type": "git",
     "url": "git://github.com/datasets/geo-countries.git"
@@ -11,7 +11,7 @@
     {
       "name": "Natural Earth",
       "path": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip",
-      "title": "Natural Earth"
+      "title": "Natural Earth, 10m Admin-0 Countries"
     }
   ],
   "keywords": [
@@ -23,14 +23,14 @@
     {
       "name": "ODC-PDDL-1.0",
       "path": "https://opendatacommons.org/licenses/pddl/1.0/",
-      "title": "Open Data Commons Public Domain Dedication and License v1.0"
+      "title": "Open Data Commons Public Domain Dedication and License v1.0. Natural Earth places the underlying data in the public domain."
     }
   ],
   "resources": [
     {
       "name": "countries",
       "path": "data/countries.geojson",
-      "description": "GeoJSON FeatureCollection of 258 country (and territory) polygons. Features without an assigned ISO code carry the sentinel value \"-99\" for both ISO fields.",
+      "description": "GeoJSON FeatureCollection of country (and territory) polygons. Features without an assigned ISO code carry the placeholder value \"-99\" for both ISO fields.",
       "format": "geojson",
       "mediatype": "application/json",
       "schema": {
@@ -64,7 +64,7 @@
       ]
     }
   ],
-  "homepage": "http://github.com/datasets/geo-countries",
+  "homepage": "https://github.com/datasets/geo-countries",
   "collection": "geojson",
   "has_extended_version": true,
   "has_solutions": [

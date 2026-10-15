@@ -1,70 +1,76 @@
 <a className="gh-badge" href="https://datahub.io/core/geo-countries"><img src="https://badgen.net/badge/icon/View%20on%20datahub.io/orange?icon=https://datahub.io/datahub-cube-badge-icon.svg&label&scale=1.25" alt="badge" /></a>
 
-## Description
+# Country Polygons as GeoJSON
 
-Geodata [data package][datapackage] providing geojson polygons for all the world's countries.
-Perfect for use in apps and visualizations.
+GeoJSON polygons for the world's countries and for some territories, disputed areas and special areas, taken from Natural Earth. Each polygon carries the country name and its ISO 3166-1 alpha-2 and alpha-3 codes.
+
+Column definitions and types are in `datapackage.json`.
 
 ## Data
 
-The data comes from [Natural Earth][naturalearth], a community effort to make visually pleasing, well-crafted maps with cartography or GIS software at small scale.
+`data/countries.geojson` is one GeoJSON `FeatureCollection`. Each feature is one country or area, as a `Polygon` or `MultiPolygon`, with three properties:
 
-More info about countries can be obtained from datapackage https://github.com/datasets/country-codes by a join on field ISO3166-1-Alpha-3
+| Property | Meaning |
+|---|---|
+| `name` | Common name of the country or area, for example `Argentina` or `Kosovo` |
+| `ISO3166-1-Alpha-3` | 3-letter ISO 3166-1 country code, for example `ARG`. `-99` where there is no ISO code |
+| `ISO3166-1-Alpha-2` | 2-letter ISO 3166-1 country code, for example `AR`. `-99` where there is no ISO code |
+
+More information about each country is in the [country-codes][country-codes] data package. Join it on `ISO3166-1-Alpha-3`.
+
+### Known limitations
+
+* Natural Earth writes `-99` where it has no ISO code in its main code fields. Two real countries are affected, France and Norway. The build fills them from Natural Earth's own `ISO_A3_EH` and `ISO_A2_EH` fields (`FRA` and `FR`, `NOR` and `NO`).
+* Some features still have `-99` in both code fields. They are disputed or special areas that have no ISO 3166-1 code, for example Kosovo, Northern Cyprus, Somaliland, Siachen Glacier, Spratly Islands and Clipperton Island.
+* A join on `ISO3166-1-Alpha-3` will not match those features. `-99` is also not a unique key: it appears on every one of them.
+* Natural Earth draws country boundaries according to their de facto status (see its [disputed boundaries policy][ne-disputed]). They are not necessarily the borders that any one government claims.
+* The outer rings of the polygons run clockwise. The build does not change ring direction. [RFC 7946][rfc7946] asks for counter-clockwise rings, but most tools accept both.
+* Coordinates have at most 6 decimal places.
+
+## Data sources
+
+* [Natural Earth][naturalearth], 10m Admin-0 Countries ([download page][ne-admin0]): the polygons, the country name (its `admin` field) and the ISO codes (its `iso_a3`, `iso_a2`, `iso_a3_eh` and `iso_a2_eh` fields). Licence: public domain under its [terms of use][ne-terms].
+
+Changes made to the source data: the 10m Admin-0 Countries file is converted to GeoJSON. Only the country name and the ISO 3166-1 alpha-2 and alpha-3 code fields are kept. For France and Norway, where Natural Earth has `-99` in its main code fields, the codes are taken from its `ISO_A2_EH` and `ISO_A3_EH` fields. Invalid geometries are repaired and coordinates are rounded to 6 decimal places.
+
+Not endorsed by, or affiliated with, Natural Earth.
 
 [naturalearth]: https://www.naturalearthdata.com/
-[datapackage]: https://datapackage.org/standard/data-package/
+[ne-admin0]: https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/
+[ne-terms]: https://www.naturalearthdata.com/about/terms-of-use/
+[ne-disputed]: https://www.naturalearthdata.com/about/disputed-boundaries-policy/
+[country-codes]: https://github.com/datasets/country-codes
+[rfc7946]: https://datatracker.ietf.org/doc/html/rfc7946
 
 ## Preparation
 
-To run the script and update the data:
+The build needs `make`, `curl` and [GDAL][gdal] (for `ogr2ogr`). To check that GDAL is installed:
 
-### Prerequisites
+```bash
+ogr2ogr --version
+```
 
-1. Install required tools:
-   - [GDAL](https://gdal.org/en/latest/download.html) - for geographic data processing
+To rebuild `data/countries.geojson`:
 
-2. Verify GDAL installation:
-   ```bash
-   ogr2ogr --version
-   ```
+```bash
+make data
+```
 
-### Data Processing
+This downloads the latest 10m Admin-0 Countries file that Natural Earth publishes (the version is not pinned) into `ne_10m_admin_0_countries.zip`, converts it with `ogr2ogr` and saves the result in `data/countries.geojson`. The conversion keeps the three properties above, rounds coordinates to 6 decimal places and repairs invalid geometries (`-makevalid`, for example self-intersecting polygons). If the zip file is already there, it is reused. Run `make clean` to delete it.
 
-The project uses `ogr2ogr` to convert Natural Earth's country boundaries from Shapefile to GeoJSON format, with the following features:
-- Coordinate precision set to 6 decimal places
-- Geometry validation enabled (`-makevalid`):
-  - Fixes invalid geometries such as self-intersecting polygons
-  - Ensures geometric validity for better compatibility with GIS tools
-  - Ring direction is not changed: all outer rings in the output run clockwise (RFC 7946 asks for counter-clockwise; most tools accept both)
-- Selected fields:
-  - `name`: Common name of the country (from admin field)
-  - `ISO3166-1-Alpha-3`: Three-letter ISO country code (from iso_a3 field)
-  - `ISO3166-1-Alpha-2`: Two-letter ISO country code (from iso_a2 field)
+A GitHub Actions workflow runs `make data` on the 1st of every month (and on pushes to `main` and on manual runs), and commits `data/countries.geojson` if it changed.
 
-Natural Earth writes `-99` where it has no ISO code in its main code fields. Two real countries are affected, France and Norway; the build fills them from Natural Earth's own `ISO_A3_EH` and `ISO_A2_EH` fields (FRA and FR, NOR and NO). 20 of the 258 features still have `-99` in both code fields.
-These 20 are disputed or special areas (for example Kosovo, Northern Cyprus, Somaliland and Siachen Glacier) that have no ISO 3166-1 code.
-A join on `ISO3166-1-Alpha-3` will not match these features.
-
-To process the data:
-  ```bash
-  make data
-  ```
-
-This will:
-1. Download the Natural Earth countries dataset
-2. Convert it to GeoJSON format with the specified settings
-3. Save the result in `data/countries.geojson`
+[gdal]: https://gdal.org/en/latest/download.html
 
 ## License
 
-The geometry and the three attributes (`name` and the two ISO codes) come from [Natural Earth][naturalearth]. Its [terms of use](https://www.naturalearthdata.com/about/terms-of-use/) put the data in the public domain and allow commercial use without permission or credit. This dataset is offered under the [Open Data Commons Public Domain Dedication and License][pddl].
+The geometry and the three properties come from [Natural Earth][naturalearth]. Its [terms of use][ne-terms] put the data in the public domain and allow commercial use without permission or credit. We found nothing in the file that Natural Earth credits to another provider: the three properties are Natural Earth's country name and ISO code fields.
 
-A credit is not required, but a link back to [Natural Earth][naturalearth], [Lexman][lexman] and the [Open Knowledge Foundation][okfn] is appreciated. See `ATTRIBUTION.txt`.
+The maintainers offer this package under the [Open Data Commons Public Domain Dedication and License][pddl] (PDDL) 1.0. A credit is not required, but a link back to [Natural Earth][naturalearth], [Lexman][lexman] and the [Open Knowledge Foundation][okfn] is appreciated. See [ATTRIBUTION.txt](ATTRIBUTION.txt).
 
 All source code is licensed under the [MIT licence][mit].
 
 [mit]: https://opensource.org/licenses/MIT
-[naturalearth]: https://www.naturalearthdata.com/
 [pddl]: https://opendatacommons.org/licenses/pddl/1.0/
 [lexman]: https://github.com/lexman
 [okfn]: https://okfn.org/
